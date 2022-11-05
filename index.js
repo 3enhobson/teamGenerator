@@ -1,7 +1,11 @@
+const fs = require('fs');
 const inquirer = require('inquirer');
+
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern'); 
+
+const generateHTML = require('./src/generateHTML');
 
 const managers = [];
 const engineers = [];
@@ -122,7 +126,8 @@ function createTeam() {
              break;
              case 'Engineer': createEngineer();
              break;
-             default: //generateHTML();
+             default:
+                fs.writeFileSync('./dist/team.html', generateHTML({ managers, engineers, interns }));
              return;
         }
 
